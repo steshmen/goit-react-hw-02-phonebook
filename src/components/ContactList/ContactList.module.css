@@ -1,0 +1,20 @@
+.list_item {
+    margin-bottom: 10px;
+}
+
+.list_title {
+    margin-right: 10px;
+    display: inline-block;
+}
+.list_btn {
+    background-color: white;
+    border-radius: 4px;
+    border: 1px solid black;
+}
+.list_btn:hover, .list_btn:focus {
+    background-color: rgb(216, 228, 250);
+}
+.list_btn:active {
+    background-color: cornflowerblue;
+    color: white;
+}
