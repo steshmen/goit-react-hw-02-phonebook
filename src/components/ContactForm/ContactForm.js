@@ -5,11 +5,6 @@ import PropTypes from 'prop-types';
 import css from './ContactForm.module.css'
 
 export class ContactForm extends Component {
-    state = {
-        name: '',
-        number: '',
-        id: '',
-    }
     static propTypes = {
         contacts: PropTypes.arrayOf(
             PropTypes.shape({
@@ -18,6 +13,11 @@ export class ContactForm extends Component {
                 number: PropTypes.string.isRequired,
             }).isRequired
         ).isRequired
+    }
+        
+    state = {
+        name: '',
+        number: ''
     }
 
     nameId = nanoid();
@@ -28,22 +28,24 @@ export class ContactForm extends Component {
         const { contacts } = this.props;
         const { name } = this.state;
         const result = contacts.some(contact => contact.name === name);
+
         if (result) {
             alert(`${name} is already in contacts`);
             return;
         }
 
-        this.props.onSubmit(this.state);
+        const id = nanoid();
+        this.props.onSubmit({ id: id, ...this.state });
         this.reset();
     }
 
     handleChange = (e) => {
         const { value, name } = e.currentTarget;
-        this.setState({ [name]: value, id: nanoid() });
+        this.setState({ [name]: value });
     }
 
     reset = () => {
-        this.setState({ name: '', number: '', id: '' })
+        this.setState({ name: '', number: '' })
     }
 
     render() {
